@@ -30,7 +30,7 @@ To fire off the builder:
 ```
 $ vagrant ssh -c /vagrant/builder.sh
 ```
-
+NOTE: When using the newest version of virtualbox things don't quite work, use version 5.0 available from [HERE](https://www.virtualbox.org/wiki/Download_Old_Builds_5_0) make sure to completely remove any older versions of virtualbox before downgrading
 
 ## Using docker
 
