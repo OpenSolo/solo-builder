@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
     - name: Installs packages
-      sudo: true
+      become: true
       apt: pkg={{item}} state=installed update_cache=true cache_valid_time=86400
       with_items:
         - gawk
@@ -19,11 +19,11 @@
         - curl
 
     - name: Install jq
-      sudo: true
+      become: true
       get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/usr/local/bin/jq mode=0755
 
     - name: Install repo
-      sudo: true
+      become: true
       get_url: url=https://storage.googleapis.com/git-repo-downloads/repo dest=/usr/local/bin/repo mode=0755
 
     - name: Git configuration
@@ -46,14 +46,14 @@
         regexp: "^bitbucket\\.org"
 
     - name: create build dir
-      sudo: true
+      become: true
       # option to override build_dir_owner (currently used by vagrant)
-      file: path=/solo-build state=directory mode=0755 owner={{build_dir_owner | default('ubuntu')}}
+      file: path=/solo-build state=directory mode=0755 owner='ubuntu'
 
-    - name: repo init
-      shell: repo init -u https://github.com/OpenSolo/3dr-arm-yocto-bsp/
-      args:
-        chdir: /solo-build
-        creates: /solo-build/build
+    #- name: repo init
+    #  shell: repo init -u https://github.com/OpenSolo/3dr-arm-yocto-bsp/
+    #  args:
+    #    chdir: /solo-build
+    #    creates: /solo-build/build
 
     #- copy: src=~/.ssh/github_token dest=~/.ssh/github_token mode=0455

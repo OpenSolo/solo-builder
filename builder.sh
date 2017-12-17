@@ -39,6 +39,8 @@ esac
 echo
 
 #Do it.
+sudo mkdir /solo-build
+sudo chown ubuntu /solo-build
 cd /solo-build
 repo init -u https://github.com/$GIT_ACCOUNT/$GIT_REPO.git -b $GIT_BRANCH
 repo sync

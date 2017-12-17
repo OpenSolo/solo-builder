@@ -1,12 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-
+# vagrant plugin install vagrant-disksize
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
+  config.disksize.size = '50GB'
   
   config.vm.provision "shell", path: "install-vagrant-deps.sh"
 
@@ -40,6 +41,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "guest_ansible" do |ansible|
+    ansible.verbose = "vvv"
     ansible.extra_vars = {
       build_dir_owner: "vagrant"
     }
